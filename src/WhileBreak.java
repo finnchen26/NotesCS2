@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.Scanner;
 
 public class WhileBreak {
     public static void main(String[] args) {
@@ -8,8 +9,10 @@ public class WhileBreak {
     public WhileBreak() {
 //        moreFreeDonutWheel();
 //        mostFreeDonuts();
-        dunkinOrder();
-        System.out.println("We need " + dunkinOrder() + " dozen donuts.");
+//        dunkinOrder();
+//        System.out.println("We need " + dunkinOrder() + " dozen donuts.");
+        System.out.println("We need " + dunkinOrderV2() + " dozen donuts.");
+
     }
 
     public void freeDonutWheel() {
@@ -71,11 +74,38 @@ public class WhileBreak {
             }
             i++;
         }
-        if (numPeople % 12 != 0){
+        if (numPeople % 12 != 0){ // if numPeople is not perfectly divisible by 12, then we need to add an extra dozen box
             numOfBoxes += 1;
         }
-
         return numOfBoxes;
+    }
+
+    public int dunkinOrderV2(){ // this method will allow the user to input the numPeople, and also ensure that dunkin doesn't sell more donuts than they have
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the amount of donuts you would like to order: ");
+        int numPeople = scanner.nextInt(); // the scanner is an object, and the nextInt() returns the integer of the user input
+
+        int numofBoxes = 0;
+        int i = 1;
+        int donutSupply = 400;
+
+        while (i <= numPeople){
+            if(i % 12 == 0){
+                numofBoxes += 1;
+            }
+            donutSupply--;
+            i++;
+            if(donutSupply == 0){
+                System.out.println("Sorry we are out of donuts:(");
+                break;
+            }
+        }
+        if (numPeople % 12 != 0){
+            numofBoxes += 1;
+        }
+
+        scanner.close();
+        return numofBoxes;
     }
 
 }
