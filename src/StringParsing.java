@@ -13,6 +13,7 @@ public class StringParsing {
                 "you'll have to call her phone:(910)-460-9504.";
         extractPhoneNumber(phonebook1);
         extractSecondNumber(phonebook);
+        extractMultipleNumbers(phonebook);
     }
 
     public void example1() {
@@ -46,9 +47,13 @@ public class StringParsing {
 
     public void extractMultipleNumbers(String text){
         // use a while loop to find adn print all the phone number
-
-        while (text.indexOf() != -1){
-
+        text = text.toLowerCase();
+        int start = text.indexOf("phone:");
+        int end = text.indexOf(". ", start);
+        while (end > 0 && start > 0){
+            System.out.println(text.substring(start, end));
+            start = text.indexOf("phone:", start+10);
+            end = text.indexOf(". ", start);
         }
     }
 
